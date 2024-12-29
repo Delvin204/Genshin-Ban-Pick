@@ -22,7 +22,7 @@ function setUp() {
     localStorage.setItem("timer", timer);
 
     // Chuyển hướng đến trang index.html
-    window.location.href = "index.html";
+    window.location.href = "main.html";
 }
 
 // Lấy dữ liệu và hiển thị trên trang index.html
