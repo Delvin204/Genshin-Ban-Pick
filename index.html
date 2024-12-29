@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en" style="height: 100%;">
+<html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -7,233 +7,36 @@
     <link rel="icon" href="/image/Logo/Genshin_Impact.webp">
     <title>Genshin Ban/Pick</title>
     <style>
-        .img-flud{
-            animation: rotateAnim 2s infinite linear;
+        html, body {
+            height: 100%;
         }
-
-        @keyframes rotateAnim {
-            0% { transform: rotate(0deg); }  /* Bắt đầu từ 0 độ */
-            25% { transform: rotate(30deg); }
-            50% { transform: rotate(0deg); }
-            75% { transform: rotate(-30deg); }
-            100% { transform: rotate(00deg); }
+        .full-height {
+            height: 100%;
         }
     </style>
 </head>
-<body style="background: linear-gradient(to right, #CDFEDA 0%, #95BAFF 100%);" onload="loadPlayers()">
-    <div class="container">
-        <div class="header mt-3">
-            <div class="row">
-                <div class="col-1 d-flex justify-content-center">
-                    <img src="image/Material/cach-ve-ngoi-sao-1.png" alt="" class="img-flud" id="star1" style="max-width: 80px; max-height: 80px; cursor: pointer;" onclick="useStar(1)">
-                </div>
-                <div class="col-4 d-flex justify-content-center align-items-end">
-                    <h4 class="fw-bold" id="name1">Player 1</h4>
-                </div>
-                <div class="col-2 d-flex justify-content-center">
-                    <div onclick="countDown()" style="cursor: pointer;">
-                        <h5 class="fw-bold">Time Ban/Pick</h5>
-                        <div class="bg-black">
-                            <h3 class="text-white text-center" id="clock">00:00</h3>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-4 d-flex justify-content-center align-items-end">
-                    <h4 class="fw-bold" id="name2">Player 2</h4>
-                </div>
-                <div class="col-1 d-flex justify-content-center">
-                    <img src="image/Material/cach-ve-ngoi-sao-1.png" alt="" class="img-flud" id="star2" style="max-width: 80px; max-height: 80px; cursor: pointer;" onclick="useStar(2)">
-                </div>
+<body style="background: linear-gradient(to right, #CDFEDA 0%, #95BAFF 100%);" onload="loadData()">
+    <div class="container full-height d-flex justify-content-center align-items-center">
+        <form class="bg-white rounded-3" style="padding: 50px 70px; width: 40%;">
+            <h2 class="text-center fw-bold mb-3">Setting</h2>
+            <div class="form-floating mb-3">
+                <input type="text" class="form-control" id="player1" placeholder="name@example.com" required>
+                <label for="player1">Player 1 name</label>
             </div>
-        </div>
-
-        <!-- Show ban pick -->
-        <div class="main mt-3">
-
-            <!-- First haft -->
-            <div class="row">
-                <div class="col-6">
-                    <div class="row d-flex justify-content-start">
-                        <div class="col-2 px-0">
-                            <div class="d-flex justify-content-center align-items-center rounded-2" style="background-color: rgb(169, 169, 169); width: 100px; height: 100px; cursor: pointer;" onclick="remove(this)">
-                                <img src="image/Material/empty.svg" alt="" id="1" style="height: 50%; filter: grayscale(100%);">
-                            </div>
-                        </div>
-                        <div class="col-1">
-                            
-                        </div>
-                        <div class="col-2 px-0">
-                            <div class="d-flex justify-content-center align-items-center rounded-2" style="background-color: rgb(169, 169, 169); width: 100px; height: 100px; cursor: pointer;" onclick="remove(this)">
-                                <img src="image/Material/empty.svg" alt="" id="3" style="height: 50%;">
-                            </div>
-                        </div>
-                        <div class="col-2 px-0">
-                            <div class="d-flex justify-content-center align-items-center rounded-2" style="background-color: rgb(169, 169, 169); width: 100px; height: 100px; cursor: pointer;" onclick="remove(this)">
-                                <img src="image/Material/empty.svg" alt="" id="6" style="height: 50%;">
-                            </div>
-                        </div>
-                        <div class="col-2 px-0">
-                            <div class="d-flex justify-content-center align-items-center rounded-2" style="background-color: rgb(169, 169, 169); width: 100px; height: 100px; cursor: pointer;" onclick="remove(this)">
-                                <img src="image/Material/empty.svg" alt="" id="7" style="height: 50%;">
-                            </div>
-                        </div>
-                        <div class="col-2 px-0">
-                            <div class="d-flex justify-content-center align-items-center rounded-2" style="background-color: rgb(169, 169, 169); width: 100px; height: 100px; cursor: pointer;" onclick="remove(this)">
-                                <img src="image/Material/empty.svg" alt="" id="10" style="height: 50%;">
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-6">
-                    <div class="row d-flex justify-content-end">
-                        <div class="col-2">
-                            <div class="d-flex justify-content-center align-items-center rounded-2" style="background-color: rgb(169, 169, 169); width: 100px; height: 100px; cursor: pointer;" onclick="remove(this)">
-                                <img src="image/Material/empty.svg" alt="" id="9" style="height: 50%;">
-                            </div>
-                        </div>
-                        <div class="col-2">
-                            <div class="d-flex justify-content-center align-items-center rounded-2" style="background-color: rgb(169, 169, 169); width: 100px; height: 100px; cursor: pointer;" onclick="remove(this)">
-                                <img src="image/Material/empty.svg" alt="" id="8" style="height: 50%;">
-                            </div>
-                        </div>
-                        <div class="col-2">
-                            <div class="d-flex justify-content-center align-items-center rounded-2" style="background-color: rgb(169, 169, 169); width: 100px; height: 100px; cursor: pointer;" onclick="remove(this)">
-                                <img src="image/Material/empty.svg" alt="" id="5" style="height: 50%;">
-                            </div>
-                        </div>
-                        <div class="col-2">
-                            <div class="d-flex justify-content-center align-items-center rounded-2" style="background-color: rgb(169, 169, 169); width: 100px; height: 100px; cursor: pointer;" onclick="remove(this)">
-                                <img src="image/Material/empty.svg" alt="" id="4" style="height: 50%;">
-                            </div>
-                        </div>
-                        <div class="col-1">
-                            
-                        </div>
-                        <div class="col-2">
-                            <div class="d-flex justify-content-center align-items-center rounded-2" style="background-color: rgb(169, 169, 169); width: 100px; height: 100px; cursor: pointer;" onclick="remove(this)">
-                                <img src="image/Material/empty.svg" alt="" id="2" style="height: 50%; filter: grayscale(100%);">
-                            </div>
-                        </div>
-                    </div>
-                </div>
+            <div class="form-floating mb-3">
+                <input type="text" class="form-control" id="player2" placeholder="name@example.com" required>
+                <label for="player2">Player 2 name</label>
             </div>
-
-            <!-- Second haft -->
-            <div class="row mt-3">
-                <div class="col-6">
-                    <div class="row d-flex justify-content-start">
-                        <div class="col-2 px-0">
-                            <div class="d-flex justify-content-center align-items-center rounded-2" style="background-color: rgb(169, 169, 169); width: 100px; height: 100px; cursor: pointer;" onclick="remove(this)">
-                                <img src="image/Material/empty.svg" alt="" id="11" style="height: 50%; filter: grayscale(100%);">
-                            </div>
-                        </div>
-                        <div class="col-1">
-                            
-                        </div>
-                        <div class="col-2 px-0">
-                            <div class="d-flex justify-content-center align-items-center rounded-2" style="background-color: rgb(169, 169, 169); width: 100px; height: 100px; cursor: pointer;" onclick="remove(this)">
-                                <img src="image/Material/empty.svg" alt="" id="14" style="height: 50%;">
-                            </div>
-                        </div>
-                        <div class="col-2 px-0">
-                            <div class="d-flex justify-content-center align-items-center rounded-2" style="background-color: rgb(169, 169, 169); width: 100px; height: 100px; cursor: pointer;" onclick="remove(this)">
-                                <img src="image/Material/empty.svg" alt="" id="15" style="height: 50%;">
-                            </div>
-                        </div>
-                        <div class="col-2 px-0">
-                            <div class="d-flex justify-content-center align-items-center rounded-2" style="background-color: rgb(169, 169, 169); width: 100px; height: 100px; cursor: pointer;" onclick="remove(this)">
-                                <img src="image/Material/empty.svg" alt="" id="18" style="height: 50%;">
-                            </div>
-                        </div>
-                        <div class="col-2 px-0">
-                            <div class="d-flex justify-content-center align-items-center rounded-2" style="background-color: rgb(169, 169, 169); width: 100px; height: 100px; cursor: pointer;" onclick="remove(this)">
-                                <img src="image/Material/empty.svg" alt="" id="19" style="height: 50%;">
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-6">
-                    <div class="row d-flex justify-content-end">
-                        <div class="col-2">
-                            <div class="d-flex justify-content-center align-items-center rounded-2" style="background-color: rgb(169, 169, 169); width: 100px; height: 100px; cursor: pointer;" onclick="remove(this)">
-                                <img src="image/Material/empty.svg" alt="" id="20" style="height: 50%;">
-                            </div>
-                        </div>
-                        <div class="col-2">
-                            <div class="d-flex justify-content-center align-items-center rounded-2" style="background-color: rgb(169, 169, 169); width: 100px; height: 100px; cursor: pointer;" onclick="remove(this)">
-                                <img src="image/Material/empty.svg" alt="" id="17" style="height: 50%;">
-                            </div>
-                        </div>
-                        <div class="col-2">
-                            <div class="d-flex justify-content-center align-items-center rounded-2" style="background-color: rgb(169, 169, 169); width: 100px; height: 100px; cursor: pointer;" onclick="remove(this)">
-                                <img src="image/Material/empty.svg" alt="" id="16" style="height: 50%;">
-                            </div>
-                        </div>
-                        <div class="col-2">
-                            <div class="d-flex justify-content-center align-items-center rounded-2" style="background-color: rgb(169, 169, 169); width: 100px; height: 100px; cursor: pointer;" onclick="remove(this)">
-                                <img src="image/Material/empty.svg" alt="" id="13" style="height: 50%;">
-                            </div>
-                        </div>
-                        <div class="col-1">
-                            
-                        </div>
-                        <div class="col-2">
-                            <div class="d-flex justify-content-center align-items-center rounded-2" style="background-color: rgb(169, 169, 169); width: 100px; height: 100px; cursor: pointer;" onclick="remove(this)">
-                                <img src="image/Material/empty.svg" alt="" id="12" style="height: 50%; filter: grayscale(100%);">
-                            </div>
-                        </div>
-                    </div>
-                </div>
+            <div class="form-floating mb-3">
+                <input type="text" class="form-control" id="timer" placeholder="name@example.com" required>
+                <label for="timer">Ban/Pick time (Second)</label>
             </div>
-        </div>
-    </div>
-
-    <!-- Lựa nhân vật -->
-    <div class="mt-5 d-flex justify-content-around" style="max-width: 100%;">
-        <div class="rounded-3" style="background-color: rgba(0, 0, 0, 0.45); max-width: 13.5%; position: relative;">
-            <img class="position-absolute top-0 start-50 translate-middle" src="image/Elemental/Geo.png" alt="" style="width: 40px;">
-            <div class="row g-0 pb-4 mt-2" id="geo">
-                
+            <div class="d-grid gap-2">
+                <button class="btn btn-primary btn-lg" type="button" onclick="setUp()">Go</button>
             </div>
-        </div>
-        <div class="rounded-3" style="background-color: rgba(0, 0, 0, 0.45); max-width: 13.5%; position: relative;">
-            <img class="position-absolute top-0 start-50 translate-middle" src="image/Elemental/Ameno.png" alt="" style="width: 40px;">
-            <div class="row g-0 pb-4 mt-2" id="ameno">
-                
-            </div>
-        </div>
-        <div class="rounded-3" style="background-color: rgba(0, 0, 0, 0.45); max-width: 13.5%; position: relative;">
-            <img class="position-absolute top-0 start-50 translate-middle" src="image/Elemental/Pyro.png" alt="" style="width: 40px;">
-            <div class="row g-0 pb-4 mt-2" id="pyro">
-                
-            </div>
-        </div>
-        <div class="rounded-3" style="background-color: rgba(0, 0, 0, 0.45); max-width: 13.5%; position: relative;">
-            <img class="position-absolute top-0 start-50 translate-middle" src="image/Elemental/Hydro.png" alt="" style="width: 40px;">
-            <div class="row g-0 pb-4 mt-2" id="hydro">
-                
-            </div>
-        </div>
-        <div class="rounded-3" style="background-color: rgba(0, 0, 0, 0.45); max-width: 13.5%; position: relative;">
-            <img class="position-absolute top-0 start-50 translate-middle" src="image/Elemental/Cryo.png" alt="" style="width: 40px;">
-            <div class="row g-0 pb-4 mt-2" id="cryo">
-                
-            </div>
-        </div>
-        <div class="rounded-3" style="background-color: rgba(0, 0, 0, 0.45); max-width: 13.5%; position: relative;">
-            <img class="position-absolute top-0 start-50 translate-middle" src="image/Elemental/Electro.png" alt="" style="width: 40px;">
-            <div class="row g-0 pb-4 mt-2" id="electro">
-                
-            </div>
-        </div>
-        <div class="rounded-3" style="background-color: rgba(0, 0, 0, 0.45); max-width: 13.5%; position: relative;">
-            <img class="position-absolute top-0 start-50 translate-middle" src="image/Elemental/Dendro.png" alt="" style="width: 40px;">
-            <div class="row g-0 pb-4 mt-2" id="dendro">
-                
-            </div>
-        </div>
+        </form>
     </div>
 </body>
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
-<script src="js/script.js"></script>
+<script src="/js/script.js"></script>
 </html>
