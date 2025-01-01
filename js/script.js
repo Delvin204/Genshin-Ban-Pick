@@ -268,3 +268,4 @@ function remove(element) {
     elementChild.style.height = "50%";
     element.style.backgroundColor = "rgb(169, 169, 169)";
 }
+// abc xyz 
